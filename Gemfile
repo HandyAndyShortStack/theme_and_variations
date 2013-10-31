@@ -6,6 +6,7 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'pry-rails'
 gem 'rails-erd'
+gem 'httparty'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
