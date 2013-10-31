@@ -9,8 +9,10 @@ describe Theme do
       it "syncs names"
       it "syncs styles"
       it "syncs javascripts"
-      it "builds layouts for each liquid file"
-      it "syncs layouts that already exist"
+      it "syncs asset URIs"
+      it "syncs the layout"
+      it "builds templates for each liquid file"
+      it "syncs templates that already exist"
     end
     it "does nothing if index.liquid is not present"
   end
