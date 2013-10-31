@@ -11,12 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030223114) do
+ActiveRecord::Schema.define(:version => 20131030224617) do
+
+  create_table "content_areas", :force => true do |t|
+    t.integer  "page_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "layouts", :force => true do |t|
     t.text     "html"
     t.integer  "theme_id"
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "pages", :force => true do |t|
+    t.integer  "layout_id"
+    t.integer  "site_id"
+    t.text     "options"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
