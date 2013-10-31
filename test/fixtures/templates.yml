@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  html: MyText
   theme_id: 1
-  name: MyString
+  liquid: MyText
 
 two:
-  html: MyText
   theme_id: 1
-  name: MyString
+  liquid: MyText
