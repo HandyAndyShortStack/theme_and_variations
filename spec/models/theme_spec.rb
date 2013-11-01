@@ -25,13 +25,13 @@ describe Theme do
         expect(theme).to have_received(:update_attributes)
       end
 
-      it "syncs styles" do
-        theme.stub(:update_attributes) do |hsh|
-          expect(hsh[:styles]).to eq([SAMPLE_THEME_URI + "/assets/style.css"])
-        end
-        theme.sync(SAMPLE_THEME_URI)
-        expect(theme).to have_received(:update_attributes)
-      end
+      # it "syncs styles" do
+      #   theme.stub(:update_attributes) do |hsh|
+      #     expect(hsh[:styles]).to eq([SAMPLE_THEME_URI + "/assets/style.css"])
+      #   end
+      #   theme.sync(SAMPLE_THEME_URI)
+      #   expect(theme).to have_received(:update_attributes)
+      # end
       it "syncs javascripts"
       it "syncs images"
       it "syncs the layout"
