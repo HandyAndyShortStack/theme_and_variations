@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031185553) do
+ActiveRecord::Schema.define(:version => 20131101220138) do
 
   create_table "content_areas", :force => true do |t|
     t.integer  "page_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20131031185553) do
     t.text     "liquid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "path"
   end
 
   create_table "themes", :force => true do |t|
