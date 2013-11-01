@@ -13,17 +13,17 @@ describe Theme do
         theme.stub(:update_attributes) do |hsh|
           expect(hsh[:name]).to eq("sample-theme")
         end
-        theme.sync(SAMPLE_THEME_URI)
+        theme.sync("sample-theme", "theme-and-variations")
         expect(theme).to have_received(:update_attributes)
       end
 
-      it "syncs URIs" do
-        theme.stub(:update_attributes) do |hsh|
-          expect(hsh[:uri]).to eq(SAMPLE_THEME_URI)
-        end
-        theme.sync(SAMPLE_THEME_URI)
-        expect(theme).to have_received(:update_attributes)
-      end
+      # it "syncs URIs" do
+      #   theme.stub(:update_attributes) do |hsh|
+      #     expect(hsh[:uri]).to eq(SAMPLE_THEME_URI)
+      #   end
+      #   theme.sync(SAMPLE_THEME_URI)
+      #   expect(theme).to have_received(:update_attributes)
+      # end
 
       # it "syncs styles" do
       #   theme.stub(:update_attributes) do |hsh|

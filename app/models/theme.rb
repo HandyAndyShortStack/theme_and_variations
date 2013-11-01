@@ -5,29 +5,23 @@ class Theme < ActiveRecord::Base
   serialize :images, Array
   has_many :sites
 
-  def sync location
-    return false unless responses = get_responses(location)
-    name = URI(location).path.split('/').last
+  def sync theme_name, bucket
+    return false unless bucket_list = get_bucket_list(theme_name, bucket)
     update_attributes({
-      name: name,
-      uri:  location
+      name: theme_name
     })
   end
 
 private
   
-  def get_responses location
-    responses = {
-      layout: HTTParty.get(location + "/layout/layout.liquid"),
-      style:  HTTParty.get(location + "/assets/style.css"),
-      index:  HTTParty.get(location + "/templates/index.liquid"),
-    }
-    success = true
-    responses.each do |key, value|
-      success = false unless value.code == 200
-    end
-    if success
-      responses
+  def get_bucket_list theme_name, bucket
+    s3_uri = "http://#{bucket}.s3.amazonaws.com/?prefix=#{theme_name}/"
+    response = HTTParty.get(s3_uri).parsed_response
+    bucket_list = response["ListBucketResult"]["Contents"]
+    bucket_list.map! { |item| item["Key"].sub("#{theme_name}/", "") }
+    bucket_list.delete_if { |item| item =~ /\/$/ || item.empty? }
+    if %w(assets/style.css.liquid layout/theme.liquid templates/index.liquid).-(bucket_list).empty?
+      bucket_list
     else
       false
     end

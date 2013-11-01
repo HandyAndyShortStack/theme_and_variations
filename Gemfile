@@ -8,6 +8,7 @@ gem 'pry-rails'
 gem 'rails-erd'
 gem 'httparty'
 gem 'aws-s3'
+gem 'nokogiri'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
