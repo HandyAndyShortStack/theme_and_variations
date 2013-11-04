@@ -3,7 +3,7 @@ ThemeAndVariations::Application.routes.draw do
       r.subdomain.present? &&
       r.subdomain != "www" &&
       r.domain != 'herokuapp.com' }) do
-    get "/:page_url", to: "sites#show", as: :page_link
+    get "/:page", to: "sites#show", as: :page_link
     get "", to: "sites#show", as: :show_site
   end
 end
