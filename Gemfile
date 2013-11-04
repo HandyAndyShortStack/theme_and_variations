@@ -9,6 +9,7 @@ gem 'rails-erd'
 gem 'httparty'
 gem 'aws-s3'
 gem 'nokogiri'
+gem 'liquid'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
