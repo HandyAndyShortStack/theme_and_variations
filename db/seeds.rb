@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+theme = Theme.find_by_uri("https://s3-us-west-2.amazonaws.com/theme-and-variations/checked-theme")
+theme = Theme.create unless theme
+theme.sync "checked-theme", "theme-and-variations"
+
+site_attributes = {
+  subdomain:     "sample-site",
+  theme_id:      theme.id,
+  options: {
+    title:       "Sample Site",
+    meta_tags:   "<meta name='robots' content='noindex, nofollow'>",
+    custom_css:  "style.css",
+    closing_tag: "<div id='closing-tag'></div>",
+    gac:         "<div id='gac'></div>",
+    gwt:         "<div id='gwt'></div>",
+    description: "sample description"
+  }
+}
+site = Site.find_by_subdomain("sample-site") || Site.create
+site.update_attributes(site_attributes)
