@@ -7,29 +7,18 @@
   <head>
     <meta charset="utf-8" />
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
-
-    <title>
-    {% if template == 'index' %}
-      {{ page_title }}
-    {% elsif template == '404' %}
-      Page Not Found
-    {% endif %}
-    </title>
-
-    {% if page_description %}
-    <meta name="description" content="{{ page_description }}" />
-    {% endif %}
-
-    <link rel="canonical" href="{{ canonical_url }}" />
+    <title>{{ site.title }} - {{ page.title }}</title>
+    <meta name="description" content="{{ site.description }}" />
+    <meta name="keywords" content="{{ site.meta_tags }}" />
+    {{ site.gwt }}
+    <link rel="canonical" href="{{ site.custom_url }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    {{ '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css' | script_tag }}
-    {{ 'style.css' | asset_url | stylesheet_tag }}
-
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
+    <link href="../assets/style.css" rel="stylesheet" media="screen">
+    <link href="{{ site.custom_css }}" rel="stylesheet" media="screen">
     <!--[if lt IE 9]>
-    {{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+    <link href="//html5shiv.googlecode.com/svn/trunk/html5.js" rel="stylesheet" media="screen">
     <![endif]-->
-
   </head>
 
   <body>
@@ -38,20 +27,19 @@
         <div class="row">
           <header id="header">
             <div class="span7">
-              <h1>{{ site_title }}</h1>
+              <h1>{{ site.title }}</h1>
             </div>
             <nav class="span5">
               <ul id="menu" class="pull-right nav inline">
-                {% for link in linklists.main-menu.links %}
-                  <a href="{{ link.url }}" title="{{ link.title }}"{% if link.active %} class="active"{% endif %}>{{ link.title }}</a>
-                {% endfor %}
+                <a href="#" class="active">Home</a>
               </ul>
             </nav>
           </header>
         </div>
 
         <div id="content" class="clearfix">
-          {{ content_for_layout }}
+          <h2>{{ page.title }}</h2>
+          <p>page content</p>
         </div>
       </div>
       <div id="push"></div>
@@ -61,13 +49,15 @@
       <div class="container">
         <div class="row">
           <div class="span12">
-            Copyright &copy; {{ "now" | date: "%Y" }} {{ shop.name }}. {{ powered_by_link }}.
+            Copyright &copy; {{ site.subdomain }}.
           </div>
         </div>
       </div>
     </footer>
 
-    {{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
-    {{ '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js' | script_tag }}
+    {{ site.closing_tag }}
+    {{ site.gac }}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
   </body>
 </html>
