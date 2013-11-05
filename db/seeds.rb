@@ -9,7 +9,7 @@ site.update_attributes({
   options: {
     title:       "Sample Site",
     meta_tags:   "<meta name='robots' content='noindex, nofollow'>",
-    custom_css:  "style.css",
+    custom_css:  "https://s3-us-west-2.amazonaws.com/theme-and-variations/stubs/style.css",
     closing_tag: "<div id='closing-tag'></div>",
     gac:         "<div id='gac'></div>",
     gwt:         "<div id='gwt'></div>",
@@ -17,11 +17,10 @@ site.update_attributes({
   }
 })
 
-page = site.pages.find_by_url("sample-page") || Page.create
+page = site.pages.find_by_url("index") || site.pages.create
 page.update_attributes({
   template_id: theme.templates.first.id,
-  site_id:     site.id,
-  url:         "sample-url",
+  url:         "index",
   title:       "Sample Page",
   options: {}
 })

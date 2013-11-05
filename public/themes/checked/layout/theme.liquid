@@ -43,7 +43,8 @@
 
         <div id="content" class="clearfix">
           <h2>{{ page.title }}</h2>
-          <p>page content</p>
+          {{ content_for_page }}
+          <img src="{{ 'beach_ball.png' | asset_url }}" />
         </div>
       </div>
       <div id="push"></div>

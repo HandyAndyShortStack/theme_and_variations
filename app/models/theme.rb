@@ -51,8 +51,6 @@ class Theme < ActiveRecord::Base
       @theme.styles.map { |style| Liquid::Template.parse(style).render({}, filters: [filter_module]) }
     end
 
-  private
-
     def filter_module theme=@theme
       Module.new do
         define_method :asset_url do |input|
