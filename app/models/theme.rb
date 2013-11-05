@@ -25,6 +25,29 @@ class Theme < ActiveRecord::Base
     true
   end
 
+  def drop
+    Theme::Drop.new self
+  end
+
+  class Drop < Liquid::Drop
+
+    def initialize theme
+      @theme = theme
+    end
+
+    method_names = [
+      :styles,
+      :javascripts,
+      :images
+    ]
+
+    method_names.each do |method_name|
+      define_method method_name do
+        @theme.send method_name
+      end
+    end
+  end
+
 private
 
   def get_bucket_list theme_name, bucket

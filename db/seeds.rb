@@ -2,7 +2,8 @@ theme = Theme.find_by_uri("https://s3-us-west-2.amazonaws.com/theme-and-variatio
 theme = Theme.create unless theme
 theme.sync "checked-theme", "theme-and-variations"
 
-site_attributes = {
+site = Site.find_by_subdomain("sample-site") || Site.create
+site.update_attributes({
   subdomain:     "sample-site",
   theme_id:      theme.id,
   options: {
@@ -14,6 +15,13 @@ site_attributes = {
     gwt:         "<div id='gwt'></div>",
     description: "sample description"
   }
-}
-site = Site.find_by_subdomain("sample-site") || Site.create
-site.update_attributes(site_attributes)
+})
+
+page = site.pages.find_by_url("sample-page") || Page.create
+page.update_attributes({
+  template_id: theme.templates.first.id,
+  site_id:     site.id,
+  url:         "sample-url",
+  title:       "Sample Page",
+  options: {}
+})
