@@ -33,7 +33,8 @@ describe Theme do
 
       it "syncs styles" do
         theme.stub(:update_attributes) do |hsh|
-          expect(hsh[:styles]).to eq(["assets/style.css.liquid"])
+          style = HTTParty.get("#{SAMPLE_THEME_URI}/assets/style.css.liquid").body
+          expect(hsh[:styles]).to eq([style])
         end
         theme.sync("sample-theme", "theme-and-variations")
         expect(theme).to have_received(:update_attributes)
