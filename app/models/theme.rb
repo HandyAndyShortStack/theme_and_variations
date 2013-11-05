@@ -9,7 +9,8 @@ class Theme < ActiveRecord::Base
   def sync theme_name, bucket
     return false unless bucket_list = get_bucket_list(theme_name, bucket)
     uri = "https://s3-us-west-2.amazonaws.com/#{bucket}/#{theme_name}"
-    styles = get_files(bucket_list) { |file| file =~ /^assets\/.+\.css$/ }
+    styles = get_files(bucket_list) { |file| file =~ /^assets\/.+\.css\.liquid$/ }
+    styles.map! { |path| HTTParty.get("#{uri}/#{path}").body }
     javascripts = get_files(bucket_list) { |file| file =~ /^assets\/.+\.js$/ }
     images = get_files(bucket_list) { |file| file =~ /^assets\/.+\.(gif|jpg|jpeg|tiff|png)$/ }
     layout = HTTParty.get("#{uri}/layout/theme.liquid").body
@@ -36,7 +37,6 @@ class Theme < ActiveRecord::Base
     end
 
     method_names = [
-      :styles,
       :javascripts,
       :images
     ]
@@ -44,6 +44,20 @@ class Theme < ActiveRecord::Base
     method_names.each do |method_name|
       define_method method_name do
         @theme.send(method_name).map { |item| "#{@theme.uri}/#{item}" }
+      end
+    end
+
+    def styles
+      @theme.styles.map { |style| Liquid::Template.parse(style).render({}, filters: [filter_module]) }
+    end
+
+  private
+
+    def filter_module theme=@theme
+      Module.new do
+        define_method :asset_url do |input|
+          "#{theme.uri}/assets/#{input}"
+        end
       end
     end
   end
@@ -57,7 +71,7 @@ private
     return false if bucket_list.class != Array
     bucket_list.map! { |item| item["Key"].sub("#{theme_name}/", "") }
     bucket_list.delete_if { |item| item =~ /\/$/ || item.empty? }
-    if %w(assets/style.css layout/theme.liquid templates/index.liquid).-(bucket_list).empty?
+    if %w(assets/style.css.liquid layout/theme.liquid templates/index.liquid).-(bucket_list).empty?
       bucket_list
     else
       false

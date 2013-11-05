@@ -16,7 +16,9 @@
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
     <link href="{{ site.custom_css }}" rel="stylesheet" media="screen">
     {% for style in theme.styles %}
-      <link href="{{ style }}" rel="stylesheet" media="screen">
+      <style>
+        {{ style }}
+      </style>
     {% endfor %}
     <!--[if lt IE 9]>
     <link href="//html5shiv.googlecode.com/svn/trunk/html5.js" rel="stylesheet" media="screen">
