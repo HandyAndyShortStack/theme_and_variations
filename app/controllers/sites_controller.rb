@@ -23,7 +23,8 @@ private
       content = site_template.render({
         "content_for_page" => content_for_page,
         "site"             => @site.drop,
-        "page"             => @page.drop
+        "page"             => @page.drop,
+        "theme"            => @theme.drop
       })
       render text: content
     else
