@@ -17,10 +17,10 @@ site.update_attributes({
   }
 })
 
-page = site.pages.find_by_url("index") || site.pages.create
+page = site.pages.find_by_url("sample-url") || site.pages.create
 page.update_attributes({
   template_id: theme.templates.first.id,
-  url:         "index",
+  url:         "sample-url",
   title:       "Sample Page",
   options: {}
 })
