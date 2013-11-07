@@ -1,5 +1,5 @@
 class Block < ActiveRecord::Base
-  attr_accessible :options, :sandbox_id
+  attr_accessible :options, :sandbox_id, :name
   belongs_to :sandbox
   serialize :options, Hash
 
@@ -13,16 +13,6 @@ class Block < ActiveRecord::Base
 
   def respond_to? method_name, include_all=false
     super || !!options[method_name]
-  end
-
-  def render
-    ActionView::Base.new(Rails.configuration.paths["app/views"]).render({
-      partial: 'blocks/layout',
-      format: :txt, 
-      locals:  { 
-        block: self
-      }
-    })
   end
 
   def block_type
