@@ -11,13 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131104232728) do
-
-  create_table "content_areas", :force => true do |t|
-    t.integer  "page_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20131107164147) do
 
   create_table "pages", :force => true do |t|
     t.integer  "site_id"
