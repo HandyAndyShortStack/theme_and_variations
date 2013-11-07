@@ -1,0 +1,5 @@
+<div class="sandbox">
+  <% sandbox.blocks.each do |block| %>
+    <%= render partial: "blocks/layout", locals: { block: block } %>
+  <% end %>
+</div>
