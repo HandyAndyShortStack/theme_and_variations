@@ -2,6 +2,8 @@ require 'spec_helper'
 
 feature "Rendering a site with theme" do
 
+  source = "https://s3-us-west-2.amazonaws.com/theme-and-variations/checked-theme/assets"
+
   background do
     switch_to_subdomain("sample-site")
     visit('/sample-url')
@@ -42,12 +44,18 @@ feature "Rendering a site with theme" do
   end
 
   scenario "javascripts are output" do
-    source = "https://s3-us-west-2.amazonaws.com/theme-and-variations/checked-theme/assets/main.js"
-    expect(page).to have_xpath("//script[@src = '#{source}']", visible: false)
+    expect(page).to have_xpath("//script[@src = '#{source}/main.js']", visible: false)
   end
 
-  scenario "images in layout are output"
-  scenario "images in page template are output"
-  scenario "images in css are rendered"
+  scenario "images in layout are output" do
+    expect(page).to have_xpath("//img[@src='#{source}/beach_ball.png']")
+  end
 
+  scenario "images in page template are output" do
+    expect(page).to have_xpath("//img[@src='#{source}/lettuce.png']")
+  end
+
+  scenario "images in css are rendered" do
+    expect(body).to have_content("background: url(#{source}/random_grey_variations.png);")
+  end
 end
