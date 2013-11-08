@@ -4,6 +4,6 @@ class Template < ActiveRecord::Base
   belongs_to :theme
 
   def name
-    path.sub "templates/", ""
+    path.sub("templates/", "").sub(".liquid", "")
   end
 end

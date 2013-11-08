@@ -3,7 +3,7 @@ class TestingTheme < Theme
   def templates
     current_templates = get_files(get_file_list("templates")) { |file| file =~ /\.liquid$/ }
     super.each do |template|
-      template.destroy unless current_templates.include? template.name
+      template.destroy unless current_templates.include? "#{template.name}.liquid"
     end
     current_templates.each do |file_name|
       path = "templates/#{file_name}"

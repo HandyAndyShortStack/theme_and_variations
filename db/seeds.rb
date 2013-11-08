@@ -29,8 +29,27 @@ testing_theme_names = Dir.entries("#{Rails.root.to_s}/themes") - [".", ".."]
 TestingTheme.all.each { |theme| theme.destroy unless testing_theme_names.include? theme.name }
 testing_theme_names.each do |name|
   theme = TestingTheme.find_by_name(name) || TestingTheme.create(name: name)
-  site = theme.sites.find_by_subdomain(name) || theme.sites.create(subdomain: name)
+  site = theme.sites.find_by_subdomain(name) || theme.sites.create
+  site.update_attributes({
+    subdomain:     name,
+    theme_id:      theme.id,
+    options: {
+      title:       "Sample Site",
+      meta_tags:   "<meta name='robots' content='noindex, nofollow'>",
+      custom_css:  "https://s3-us-west-2.amazonaws.com/theme-and-variations/stubs/style.css",
+      closing_tag: "<div id='closing-tag'></div>",
+      gac:         "<div id='gac'></div>",
+      gwt:         "<div id='gwt'></div>",
+      description: "sample description"
+    }
+  })
   theme.templates.each do |template|
-    page = site.pages.find_by_url(template.name) || site.pages.create(url: template.name, template_id: template.id)
+    page = site.pages.find_by_url(template.name) || site.pages.create
+    page.update_attributes({
+      template_id: template.id,
+      url:         template.name,
+      title:       "Sample Page",
+      options: {}
+    })
   end
 end
