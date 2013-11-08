@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107230803) do
+ActiveRecord::Schema.define(:version => 20131108181851) do
 
   create_table "blocks", :force => true do |t|
     t.text     "options"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20131107230803) do
     t.text     "javascripts"
     t.text     "layout"
     t.text     "images"
+    t.string   "type"
   end
 
 end
