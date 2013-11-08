@@ -24,3 +24,9 @@ page.update_attributes({
   title:       "Sample Page",
   options: {}
 })
+
+testing_theme_names = Dir.entries("#{Rails.root.to_s}/themes") - [".", ".."]
+TestingTheme.all.each { |theme| theme.destroy unless testing_theme_names.include? theme.name }
+testing_theme_names.each do |name|
+  TestingTheme.find_by_name(name) || TestingTheme.create(name: name)
+end
