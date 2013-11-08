@@ -28,5 +28,9 @@ page.update_attributes({
 testing_theme_names = Dir.entries("#{Rails.root.to_s}/themes") - [".", ".."]
 TestingTheme.all.each { |theme| theme.destroy unless testing_theme_names.include? theme.name }
 testing_theme_names.each do |name|
-  TestingTheme.find_by_name(name) || TestingTheme.create(name: name)
+  theme = TestingTheme.find_by_name(name) || TestingTheme.create(name: name)
+  site = theme.sites.find_by_subdomain(name) || theme.sites.create(subdomain: name)
+  theme.templates.each do |template|
+    page = site.pages.find_by_url(template.name) || site.pages.create(url: template.name, template_id: template.id)
+  end
 end
