@@ -28,7 +28,8 @@ private
       "page"             => @page.drop,
       "theme"            => @theme.drop
     }, filters: [
-      @theme.drop.filter_module
+      @theme.drop.filter_module,
+      @page.drop.filter_module
     ])
   end
 
@@ -38,7 +39,8 @@ private
       "site" => @site.drop,
       "page" => @page.drop
     }, filters: [
-      @theme.drop.filter_module
+      @theme.drop.filter_module,
+      @page.drop.filter_module
     ])
   end
 
