@@ -26,7 +26,9 @@ class TestingTheme < Theme
   end
 
   def javascripts
-    get_files(get_file_list("assets")) { |file| file =~ /\.js$/ }
+    get_files(get_file_list("assets")) { |file| file =~ /\.js$/ }.map do |file|
+      "assets/" << file
+    end
   end
 
   def images
