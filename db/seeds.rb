@@ -37,9 +37,9 @@ testing_theme_names.each do |name|
       title:       "Sample Site",
       meta_tags:   "<meta name='robots' content='noindex, nofollow'>",
       custom_css:  "https://s3-us-west-2.amazonaws.com/theme-and-variations/stubs/style.css",
-      closing_tag: "<div id='closing-tag'></div>",
-      gac:         "<div id='gac'></div>",
-      gwt:         "<div id='gwt'></div>",
+      closing_tag: "<script type='text/javascript'>// additional closing tags here</script>",
+      gac:         "<script type='text/javascript'>// google analytics tracking here</script>",
+      gwt:         "<meta name='google-site-verification' content='string_google_asks_for'>",
       description: "sample description"
     }
   })
