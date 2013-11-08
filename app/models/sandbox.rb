@@ -1,5 +1,5 @@
 class Sandbox < ActiveRecord::Base
-  attr_accessible :page_id
+  attr_accessible :page_id, :name
   has_many :blocks
   belongs_to :page
 
