@@ -15,3 +15,9 @@
 /tmp
 
 erd.pdf
+
+# Ignore all themes
+themes/*
+
+# Except the sample theme
+!mytheme
