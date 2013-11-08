@@ -1,9 +1,7 @@
-class Page < ActiveRecord::Base
-  attr_accessible :template_id, :options, :site_id, :title, :url
+class Block < ActiveRecord::Base
+  attr_accessible :options, :sandbox_id, :name
+  belongs_to :sandbox
   serialize :options, Hash
-  has_many :sandboxes
-  belongs_to :template
-  belongs_to :site
 
   def method_missing method_name
     if response = options[method_name]
@@ -17,7 +15,7 @@ class Page < ActiveRecord::Base
     super || !!options[method_name]
   end
 
-  def drop
-    PageDrop.new self
+  def block_type
+    self.class.to_s.underscore
   end
 end

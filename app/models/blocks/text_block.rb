@@ -1,0 +1,2 @@
+class TextBlock < Block
+end
