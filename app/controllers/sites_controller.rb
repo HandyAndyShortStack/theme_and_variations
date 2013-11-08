@@ -11,6 +11,7 @@ class SitesController < ApplicationController
 private
   
   def render_page
+    params[:url] ||= "index"
     if @page = @site.pages.find_by_url(params[:url])
       @theme = @site.theme
       @template = @page.template
