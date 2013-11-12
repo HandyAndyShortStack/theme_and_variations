@@ -1,4 +1,4 @@
-<div>
+<div id="block-<%= block.id %>">
   <p>hello from the block class layout</p>
   <%= render partial: "blocks/#{block.block_type}", locals: { block: block } %>
 </div>

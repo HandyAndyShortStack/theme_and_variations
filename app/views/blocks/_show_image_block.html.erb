@@ -1,0 +1,7 @@
+<% if block.image_link %>
+  <%= link_to block.image_link do %>
+    <%= image_tag block.asset_url %>
+  <% end %>
+<% else %>
+  <%= image_tag block.asset_url %>
+<% end %>
