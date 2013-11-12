@@ -1,6 +1,8 @@
 class SitesController < ApplicationController
+  include ThemesHelper
 
   def show
+    sync_testing_themes
     if @site = Site.find_by_subdomain(request.subdomain)
       render_page
     else
@@ -9,7 +11,7 @@ class SitesController < ApplicationController
   end
 
 private
-  
+
   def render_page
     params[:url] ||= "index"
     if @page = @site.pages.find_by_url(params[:url])
