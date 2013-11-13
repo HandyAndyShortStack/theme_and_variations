@@ -1,0 +1,2 @@
+class TaglineBlock < RichTextBlock
+end
