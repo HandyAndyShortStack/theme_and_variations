@@ -1,2 +1,0 @@
-class TaglineBlock < RichTextBlock
-end

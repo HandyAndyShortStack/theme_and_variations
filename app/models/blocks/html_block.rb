@@ -1,2 +1,0 @@
-class HTMLBlock < RichTextBlock
-end
