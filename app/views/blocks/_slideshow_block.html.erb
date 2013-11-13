@@ -1,5 +1,5 @@
 <div id="myCarousel-<%= block.id %>" class="carousel">
-  <% blockimages.each_with_index do |image, index| %>
+  <% block.images.each_with_index do |image, index| %>
     <div class="item<%= " active" if index == 0 %>">
       <%= image_tag image.asset_url(:large), :class => "carousel-image" %>
     </div>
