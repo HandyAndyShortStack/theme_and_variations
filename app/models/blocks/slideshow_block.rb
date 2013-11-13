@@ -1,0 +1,2 @@
+class SlideshowBlock < Block
+end
