@@ -13,6 +13,7 @@ class SitesController < ApplicationController
 private
 
   def render_page
+    register_liquid_tags
     params[:url] ||= "index"
     if @page = @site.pages.find_by_url(params[:url])
       @theme = @site.theme
@@ -31,8 +32,7 @@ private
       "page"             => @page.drop,
       "theme"            => @theme.drop
     }, filters: [
-      @theme.drop.filter_module,
-      @page.drop.filter_module
+      @theme.drop.filter_module
     ])
   end
 
@@ -42,12 +42,15 @@ private
       "site" => @site.drop,
       "page" => @page.drop
     }, filters: [
-      @theme.drop.filter_module,
-      @page.drop.filter_module
+      @theme.drop.filter_module
     ])
   end
 
   def fail_to_render
     render text: "The site failed to render."
+  end
+
+  def register_liquid_tags
+    Liquid::Template.register_tag("sandbox", SandboxTag)
   end
 end
